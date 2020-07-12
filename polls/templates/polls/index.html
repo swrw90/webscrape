@@ -1,0 +1,11 @@
+<!--If there are any questions then create an unordered list, add a bullet point and link for each question in the list. 
+    If there's no questions display "No polls available." Access to latest_question_list variable is passed in from view.py context. {%} Is Django templating.-->
+{% if latest_question_list %} 
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a ref="/polls/{{ question.id }}/"{{ question.quest_text }}></a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

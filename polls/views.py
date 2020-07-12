@@ -6,8 +6,11 @@ from .models import Question
 # Each view takes a request object and question_id to lookup a specific question using its primary key.
 def index(request):
     latest_question_list = Question.objects.order_by('-publication_date')[:5] #Reverse order list of 5 questions by publication date.
-    output = ', '.join([q.question_text for q in latest_question_list])
-    return HttpResponse(output)
+    template = loader.get_template('polls/index.html')
+    context = {
+        'latest_question_list': latest_question_list,
+    }
+    return HttpResponse(template.render(context, request))
 
 def detail(request, question_id):
     return HttpResponse("You're looking at question %s." % question_id)
