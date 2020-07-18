@@ -3,7 +3,7 @@
 {% if latest_question_list %} 
     <ul>
     {% for question in latest_question_list %}
-        <li><a ref="/polls/{{ question.id }}/"{{ question.quest_text }}></a></li>
+        <li><a ref="{% url 'polls:detail' question.id%}">{{ question.question_text }}></a></li> <!--Point at namespaced detail view. Use detail url from urls.py, pass question.id as arg  -->
     {% endfor %}
     </ul>
 {% else %}

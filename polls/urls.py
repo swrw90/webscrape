@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+appname = 'polls'
+
 # Each path function returns a response matching the url input. <int:question_id> is used to dynamically match any pattern input.
 urlpatterns = [
     # /polls

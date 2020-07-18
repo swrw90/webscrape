@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, Http404
 from .models import Question
 
@@ -12,13 +12,10 @@ def index(request):
     }
     return render(request, 'polls/index.html/', context) #Sends request and context to index.html
 
-# Try to get question by its primary key and pass it to details.html, otherwise raise 404 error. 
+# Try to get question by its primary key and pass it via context dictionary to details.html, otherwise raise 404 error. 
 def detail(request, question_id):
-    try:
-        question = Question.objects.get(pk=question_id) #primary key = question_id
-    except Question.DoesNotExist:
-        raise Http404("Question does not exist.")
-    return render(request, 'polls/details.html', {'question': question})
+    question = get_object_or_404(Question, pk=question_id) #primary key = question_id
+    return render(request, '/polls/detail.html', {'question': question})
 
 def  results(request, question_id):
     response = "You're looking at the results of question %s."
